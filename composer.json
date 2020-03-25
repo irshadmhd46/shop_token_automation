@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "name": "root/shop_token_automation",
+=======
+    "name": "fredy/shop_tokn_automation",
+>>>>>>> bd3a7ec1d3477d1bcd953a7fa6ad45b2d81b6849
     "license": "proprietary",
     "type": "project",
     "autoload": {

@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    {% block head %}
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
+        
+       <!-- Scripts start -->
+        <script src="{{ asset('bundles/app/js/jquery.min.js')}}"></script>
+{% endblock %}
     <body>
-        {% block body %}{% endblock %}
+        {% block bodycontent %}{% endblock bodycontent %}
         {% block javascripts %}{% endblock %}
     </body>
+    {%block customjs %}
+    {% endblock customjs %}
 </html>
