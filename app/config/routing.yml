@@ -1,0 +1,7 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+shop_master:
+    resource: "@AppBundle/Resources/config/routing/shop_master.yml"
+    prefix:   /
