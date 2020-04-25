@@ -1,0 +1,33 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class='container'>
+    <div class="row">
+        <div class="col-sm-6 col-lg-4 col-xl-6">
+        </div>
+        <div class="col-sm-6 col-lg-4 col-xl-6">
+            <h1> Login</h1>
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                {% endif %}
+
+                <label for="username">{{ 'security.login.username'|trans }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" class='form-control' />
+
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required="required" autocomplete="current-password" class='form-control' />
+
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                <br>
+                <div class='clearfix'>
+                    <input class='btn btn-primary btn-block' type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                </div>
+                <small class="pull-right"><a href="{{ path('fos_user_registration_register') }}">register new account?</a></small>
+            </form>
+        </div>
+    </div>
+</div>
