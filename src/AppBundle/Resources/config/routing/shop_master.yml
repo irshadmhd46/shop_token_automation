@@ -1,5 +1,5 @@
 shop_master_index:
-    path:     /index
+    path:     /home
     defaults: { _controller: AppBundle:ShopMaster:index }
    
 shop_master_save:

@@ -19,7 +19,7 @@ class User extends BaseUser {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @var string
      *
@@ -27,6 +27,12 @@ class User extends BaseUser {
      */
     private $phoneNo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstName", type="string")
+     */
+    private $firstName;
 
     /**
      * Set phoneNo
@@ -35,8 +41,8 @@ class User extends BaseUser {
      *
      * @return User
      */
-    public function setPhoneNo($phoneNo)
-    {
+    public function setPhoneNo($phoneNo) {
+        $this->setUsername($phoneNo);
         $this->phoneNo = $phoneNo;
 
         return $this;
@@ -47,8 +53,30 @@ class User extends BaseUser {
      *
      * @return integer
      */
-    public function getPhoneNo()
-    {
+    public function getPhoneNo() {
         return $this->phoneNo;
     }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName) {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName() {
+        return $this->firstName;
+    }
+
 }
