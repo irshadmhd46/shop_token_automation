@@ -84,7 +84,7 @@ class ClinicDetailsFormType extends AbstractType {
                     'required' => true,
                     'attr' =>
                         ['placeholder' => ' Patient DOB',
-                        'class' => 'patientLastName form-control clearAllFields'
+                        'class' => 'patientDob form-control clearAllFields'
                     ]
                 ])
                 ->add('patientContact', TextType::class, [

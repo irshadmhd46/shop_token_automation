@@ -87,7 +87,8 @@ class ClinicDetailsController extends Controller {
         $consultationId = $request->query->get('consultationId');
         $em = $this->get('doctrine')->getManager();
         $fileSystem = new Filesystem();
-        $htmlFileName = $consultationId . "_report.html";
+        $token = rand(100, 1000);
+        $htmlFileName = $token . $consultationId . "_report.html";
         $tmpPath = $this->getParameter('temp_location_directory');
         $htmlFileLocation = $tmpPath . '/' . $htmlFileName;
         $consultationDetails = $em->getRepository('AppBundle:ClinicDetails')->find($consultationId);
@@ -98,7 +99,7 @@ class ClinicDetailsController extends Controller {
             $fileSystem->appendToFile($htmlFileLocation, $reportView);
         }
 
-        $pdfFileName = $consultationId . "_report.pdf";
+        $pdfFileName = $token . $consultationId . "_report.pdf";
         $tmpPath = $this->getParameter('temp_location_directory');
         $pdfFileLocation = $tmpPath . '/' . $pdfFileName;
         //This linux software converts an html file to pdf
@@ -132,7 +133,7 @@ class ClinicDetailsController extends Controller {
             //We are beginning the iteration. So create the file and append the headers
             $handle = fopen($csvFileLocation, 'w');
 
-            fputcsv($handle, ['Sl No','Clinic Name', 'Physician Name', 'Physician Contact', 'Patient FirstName', 'Patient LastName', 'Patient Dob', 'Patient Contact']);
+            fputcsv($handle, ['Sl No', 'Clinic Name', 'Physician Name', 'Physician Contact', 'Patient FirstName', 'Patient LastName', 'Patient Dob', 'Patient Contact']);
 
             foreach ($consultationDetails as $consultationDetail) {
                 $clinicName = $consultationDetail->getClinicname() ? $consultationDetail->getClinicname() : '';
@@ -142,7 +143,7 @@ class ClinicDetailsController extends Controller {
                 $patientLastName = $consultationDetail->getPatientLastName() ? $consultationDetail->getPatientLastName() : '';
                 $patientDob = $consultationDetail->getPatientDob() ? $consultationDetail->getPatientDob()->format('d-m-Y') : '';
                 $patientContact = $consultationDetail->getPatientContact() ? $consultationDetail->getPatientContact() : '';
-               $id = $consultationDetail->getId();
+                $id = $consultationDetail->getId();
                 fputcsv($handle, [
                     $id,
                     $clinicName,
