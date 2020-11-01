@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    {% block bodycontent %}
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3" style="text-align: center;">
+                {% if consultationDetails.logoPath != null%}
+                    <img style="width: 150px; height: 150px" src="{{consultationDetails.logoPath}}" alt="No Logo Added">
+                {% endif %}
+
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                <h2>
+                    {{consultationDetails.clinicName}}
+                </h2>
+                <h4>
+                    Consulatation report
+                </h4>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-top-100" style="padding-top: 100px">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">Physician Name</th>
+                        <td> {{consultationDetails.physicianName}}</td>
+                        <th scope="row">Physician Contact</th>
+                        <td>{{consultationDetails.physicianContact}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Patient First Name</th>
+                        <td> {{consultationDetails.patientFirstName}}</td>
+                        <th scope="row"> Patient Last Name</th>
+                        <td>{{consultationDetails.patientLastName}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Patient Dob</th>
+                        <td>{{consultationDetails.patientDob | date("m/d/Y")}}</td>
+                        <th scope="row"> Patient Contact</th>
+                        <td> {{consultationDetails.patientContact}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Chief Comlaint</th>
+                        <td colspan="3">{{consultationDetails.chiefComlaint | raw }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Consultation Note</th>
+                        <td  colspan="3">{{consultationDetails.consultationNote | raw }}</td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+        <footer>
+            <p>*This report is generated on {{ 'now'|date("m/d/Y H:i:s") }} from  IP {{clientIp}}</p>
+        </footer>
+    {% endblock %}
+</html>

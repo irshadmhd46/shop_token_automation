@@ -1,8 +1,0 @@
-shop_master_index:
-    path:     /home
-    defaults: { _controller: AppBundle:ShopMaster:index }
-   
-shop_master_save:
-    path:     /save
-    defaults: { _controller: AppBundle:ShopMaster:save }
-    

@@ -1,7 +1,7 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    #parameter_name: value
+  temp_location_directory: '%kernel.root_dir%/../var/tempLocation'
 
 services:
     # default configuration for services in *this* file

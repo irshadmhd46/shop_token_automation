@@ -6,8 +6,8 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
-shop_master:
-    resource: "@AppBundle/Resources/config/routing/shop_master.yml"
+clinic_details:
+    resource: "@AppBundle/Resources/config/routing/clinic_details.yml"
     prefix:   /
 
 fos_user:

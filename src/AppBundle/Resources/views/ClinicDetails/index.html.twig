@@ -1,0 +1,243 @@
+{#{% extends "base.html.twig" %}#}
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        {#        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">#}
+        {#        <script src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>#}
+    </head>
+    {% block bodycontent %}
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>Consultation Form</h3></div>
+                    <div class="panel-body form-group">
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id':'clinicDetails'}}) }}
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{ form_row(form.clinicName) }} 
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.logoPath)}}
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.physicianName)}}
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.physicianContact)}}
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.patientFirstName)}}
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.patientLastName)}}
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.patientDob)}}
+                        </div>
+                        <div class="col-sm-3 col-md-6 col-lg-6 col-xl-6">
+                            {{form_row(form.patientContact)}}
+                        </div>
+                        <br>
+                        <div class="col-sm-6 col-md-12 col-lg-12 col-xl-12">
+                            {{form_row(form.chiefComlaint)}}
+                        </div>
+                        <br>
+                        <div class="col-sm-6 col-md-12 col-lg-12 col-xl-12">
+                            {{form_row(form.consultationNote)}}
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="height: 50px;"> 
+                        <div style="text-align: center;">
+                            <button type="button" class="btn btn-xl btn-primary margin-inline saveBtn"  data-toggle="modal" data-target="#myModal" style="text-align: center">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Generate Report
+                            </button>
+                            <a href="#" data-toggle="modal" id="viewPreviousConsultationsTag" data-target="#viewPreviousConsultations">View Previous Consulatations</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Download Report As</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div style="text-align: center;">
+                                    <button type="button" class="btn btn-xl btn-success margin-inline pdfDownload" style="text-align: center">
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> PDF
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal fade" id="viewPreviousConsultations" role="dialog">
+                    <div class="modal-dialog ">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Previous Consultations</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div style="text-align: center;">
+                                    <button type="button" id="exportCsv" class="btn btn-xl btn-primary pull-right">CSV</button>
+                                </div>
+                                <div style="text-align: center; padding-top: 50px;">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="previousConsultataionTable">
+                                            <tbody>
+                                                <tr>
+                                                    <th>
+                                                        Clinic Name
+                                                    </th>
+                                                    <th>
+                                                        Physician Name
+                                                    </th>
+                                                    <th>
+                                                        Physician Contact
+                                                    </th>
+                                                    <th>
+                                                        Patient FirstName
+                                                    </th>
+                                                    <th>
+                                                        Patient LastName
+                                                    </th>
+                                                    <th>
+                                                        Patient Dob
+                                                    </th>
+                                                    <th>
+                                                        Patient Contact
+                                                    </th>
+                                                    <th>
+                                                        PDF
+                                                    </th>
+                                                </tr>
+                                                {% for consultationDetail in consultationDetails %}
+                                                    <tr>
+                                                        <td>
+                                                            {{ consultationDetail.clinicName}}
+                                                        </td>
+                                                        <td>
+                                                            {{ consultationDetail.physicianName}}
+                                                        </td>
+                                                        <td>
+                                                            {{ consultationDetail.physicianContact}}
+                                                        </td>
+                                                        <td>
+                                                            {{ consultationDetail.patientFirstName}}
+                                                        </td>
+                                                        <td>
+                                                            {{ consultationDetail.patientLastName}}
+                                                        </td>
+                                                        <td>
+                                                            {{ consultationDetail.patientDob | date('d/m/Y')}}
+                                                        </td>
+                                                        <td>
+                                                            {{ consultationDetail.patientContact }}
+                                                        </td>
+                                                        <td>
+                                                            <button type ="button" class="btn btn-default" value="{{ consultationDetail.id }}" id="pdfDownloadFromtable">
+                                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <input type="hidden" id="consultationId" value="0">
+                {{form_end(form)}}
+            {% endblock %}
+            {% block customjs %}
+
+
+                <script type="text/javascript">
+
+                    tinymce.init({
+                        selector: '#appbundle_clinicDetails_chiefComlaint',
+                        setup: function (editor) {
+                            editor.on('change', function () {
+                                editor.save();
+                            });
+                        }
+                    });
+                    tinymce.init({
+                        selector: '#appbundle_clinicDetails_consultationNote',
+                        setup: function (editor) {
+                            editor.on('change', function () {
+                                editor.save();
+                            });
+                        }
+                    });
+                    {#  $(document).ready(function () {
+                          $('#previousConsultataionTable').DataTable();
+                      });#}
+
+                          $(".saveBtn").on("click", function () {
+                              var form = $('#clinicDetails');
+                              var formdata = new FormData(form[0])
+                              $.ajax({
+                                  url: "{{path('clinic_details_save')}}",
+                                  data: formdata, // the formData function is available in almost all new browsers.
+                                  type: "post",
+                                  contentType: false,
+                                  processData: false,
+                                  cache: false,
+                                  dataType: "json", // Change this according to your response from the server.
+                                  error: function (err) {
+                                      console.error(err);
+                                  },
+                                  success: function (data) {
+                                      $('.clearAllFields input[type="text"]').val('');
+                                      $('#consultationId').val(data.id);
+                                      console.log(data);
+                                  },
+                              });
+                          });
+                          $(".pdfDownload").on("click", function () {
+                              var consultationId = $('#consultationId').val();
+                              window.open('{{path('pdf_generate')}}?consultationId=' + consultationId);
+                          });
+
+                          $("#pdfDownloadFromtable").on("click", function () {
+                              var id = $(this).attr('value');
+                              window.open('{{path('pdf_generate')}}?consultationId=' + id);
+                          });
+
+                          $("#exportCsv").on("click", function () {
+                              window.open('{{path('csv_generate')}}');
+                          });
+
+
+                </script>
+            {% endblock %}

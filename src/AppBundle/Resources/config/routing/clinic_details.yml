@@ -1,0 +1,17 @@
+   
+conusltation_report_index:
+    path:     /consulation_index
+    defaults: { _controller: AppBundle:ClinicDetails:index }
+    
+clinic_details_save:
+    path:     /clinic_details_save
+    defaults: { _controller: AppBundle:ClinicDetails:saveClinicDetails }
+    
+pdf_generate:
+    path:     /pdf_generate
+    defaults: { _controller: AppBundle:ClinicDetails:generatePdf }
+    
+csv_generate:
+    path:     /csv_generate
+    defaults: { _controller: AppBundle:ClinicDetails:generateCsv }
+    
